@@ -22,5 +22,11 @@
 
 			<div x-show="open">Dropdown Contents...</div>
 		</div>
+		<hr />
+		<div x-data>
+			<button @click="$el.innerHTML = 'Foo Bar!'">
+				Replace me with "Foo Bar!"
+			</button>
+		</div>
 	</body>
 </html>

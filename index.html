@@ -11,6 +11,11 @@
 			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
+		<style>
+			.complete {
+				text-decoration: line-through;
+			}
+		</style>
 	</head>
 	<body>
 		<section x-data="todo">
@@ -22,7 +27,11 @@
 			/>
 			<ul>
 				<template x-for="todo in todos">
-					<li>
+					<li :class="todo.complete ? 'complete' : ''">
+						<input
+							type="checkbox"
+							x-model="todo.complete"
+						/>
 						<label x-text="todo.title"></label>
 					</li>
 				</template>

@@ -13,20 +13,21 @@
 		></script>
 	</head>
 	<body>
-		<div x-data="{ greeting: 'Hello World!'}">
-			<p x-text="greeting"></p>
+		<div x-data="globalData">
+			<h1 x-text="message"></h1>
+			<button @click="increment">increment</button>
+			<p x-text="count"></p>
 		</div>
-		<hr />
-		<div x-data="{ open: false }">
-			<button x-on:click="open = ! open">Toggle Dropdown</button>
-
-			<div x-show="open">Dropdown Contents...</div>
-		</div>
-		<hr />
-		<div x-data>
-			<button @click="$el.innerHTML = 'Foo Bar!'">
-				Replace me with "Foo Bar!"
-			</button>
-		</div>
+		<script>
+			document.addEventListener("alpine:init", () => {
+				Alpine.data("globalData", () => ({
+					message: "Foo Bar!",
+					count: 0,
+					increment() {
+						this.count++;
+					},
+				}));
+			});
+		</script>
 	</body>
 </html>

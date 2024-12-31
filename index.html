@@ -33,6 +33,7 @@
 							x-model="todo.complete"
 						/>
 						<label x-text="todo.title"></label>
+						<button @click="removeTodo(todo)">x</button>
 					</li>
 				</template>
 			</ul>
@@ -62,6 +63,9 @@
 							});
 							this.newTodo = "";
 						}
+					},
+					removeTodo(todo) {
+						this.todos = this.todos.filter((t) => t !== todo);
 					},
 				}));
 			});

@@ -11,64 +11,28 @@
 			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
-		<style>
-			.complete {
-				text-decoration: line-through;
-			}
-		</style>
 	</head>
 	<body>
-		<section x-data="todo">
-			<h1>Todo List</h1>
+		<section
+			x-data="{
+      greeting: 'Hello World',
+      boldText: '<strong>Belajar Alpine.js</strong>',
+      get formattedGreeting() {
+        return this.greeting.toUpperCase();
+      }
+    }"
+		>
+			<p x-text="greeting"></p>
+			<p x-html="formattedGreeting"></p>
+			<p x-text="boldText"></p>
+			<p x-html="boldText"></p>
+			<hr />
 			<input
 				type="text"
-				x-model="newTodo"
-				@keydown.enter="addTodo"
+				x-model.number="greeting"
 			/>
-			<ul>
-				<template x-for="todo in todos">
-					<li :class="todo.complete ? 'complete' : ''">
-						<input
-							type="checkbox"
-							x-model="todo.complete"
-						/>
-						<label x-text="todo.title"></label>
-						<button @click="removeTodo(todo)">x</button>
-					</li>
-				</template>
-			</ul>
+			<span x-text="typeof greeting"></span>
+			<hr />
 		</section>
-		<script>
-			document.addEventListener("alpine:init", () => {
-				Alpine.data("todo", () => ({
-					todos: [
-						{
-							id: 1,
-							title: "Belajar Alpine.js",
-							complete: true,
-						},
-						{
-							id: 2,
-							title: "Kuliah S1",
-							complete: false,
-						},
-					],
-					newTodo: "",
-					addTodo() {
-						if (this.newTodo) {
-							this.todos.push({
-								id: this.todos.length + 1,
-								title: this.newTodo,
-								complete: false,
-							});
-							this.newTodo = "";
-						}
-					},
-					removeTodo(todo) {
-						this.todos = this.todos.filter((t) => t !== todo);
-					},
-				}));
-			});
-		</script>
 	</body>
 </html>

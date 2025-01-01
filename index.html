@@ -22,17 +22,31 @@
       }
     }"
 		>
-			<p x-text="greeting"></p>
-			<p x-html="formattedGreeting"></p>
+			<p
+				x-text="greeting"
+				x-ref="greet"
+			></p>
+			<p
+				x-html="formattedGreeting"
+				x-ref="formatted"
+			></p>
+			<button @click="check">Cek Value Ref</button>
 			<p x-text="boldText"></p>
 			<p x-html="boldText"></p>
 			<hr />
 			<input
 				type="text"
-				x-model.number="greeting"
+				x-model.debounce="greeting"
 			/>
-			<span x-text="typeof greeting"></span>
 			<hr />
 		</section>
+
+		<script>
+			function check() {
+				let elGreet = this.$refs.greet;
+				let elFormatted = this.$refs.formatted;
+				console.log(elGreet, elFormatted);
+			}
+		</script>
 	</body>
 </html>

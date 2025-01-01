@@ -13,40 +13,27 @@
 		></script>
 	</head>
 	<body>
-		<section
-			x-data="{
-      greeting: 'Hello World',
-      boldText: '<strong>Belajar Alpine.js</strong>',
-      get formattedGreeting() {
-        return this.greeting.toUpperCase();
-      }
-    }"
-		>
-			<p
-				x-text="greeting"
-				x-ref="greet"
-			></p>
-			<p
-				x-html="formattedGreeting"
-				x-ref="formatted"
-			></p>
-			<button @click="check">Cek Value Ref</button>
-			<p x-text="boldText"></p>
-			<p x-html="boldText"></p>
+		<div x-data="{ open: false }">
+			<button x-on:click="open = !open">Toggle Paragraph</button>
+			<div x-show="open">
+				<p>
+					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+					Odio repudiandae ipsam, est quis cupiditate dicta eum,
+					asperiores temporibus quasi rerum dolore illum tempora quo
+					vitae non molestias animi eligendi iusto.
+				</p>
+			</div>
 			<hr />
-			<input
-				type="text"
-				x-model.debounce="greeting"
-			/>
-			<hr />
-		</section>
-
-		<script>
-			function check() {
-				let elGreet = this.$refs.greet;
-				let elFormatted = this.$refs.formatted;
-				console.log(elGreet, elFormatted);
-			}
-		</script>
+			<template x-if="open">
+				<div>
+					<p>
+						Lorem ipsum dolor sit, amet consectetur adipisicing
+						elit. Odio repudiandae ipsam, est quis cupiditate dicta
+						eum, asperiores temporibus quasi rerum dolore illum
+						tempora quo vitae non molestias animi eligendi iusto.
+					</p>
+				</div>
+			</template>
+		</div>
 	</body>
 </html>

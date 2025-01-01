@@ -11,29 +11,50 @@
 			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
+		<style>
+			.transition-enter {
+				transition: opacity 0.5s ease-out;
+			}
+			.transition-enter-start {
+				opacity: 0;
+			}
+			.transition-enter-end {
+				opacity: 1;
+			}
+			.transition-leave {
+				transition: opacity 0.5s ease-in;
+			}
+			.transition-leave-start {
+				opacity: 1;
+			}
+			.transition-leave-end {
+				opacity: 0;
+			}
+		</style>
 	</head>
 	<body>
-		<div x-data="{ open: false }">
-			<button x-on:click="open = !open">Toggle Paragraph</button>
-			<div x-show="open">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Odio repudiandae ipsam, est quis cupiditate dicta eum,
-					asperiores temporibus quasi rerum dolore illum tempora quo
-					vitae non molestias animi eligendi iusto.
-				</p>
+		<div
+			x-data="{ isOpen: false }"
+			class="p-6"
+		>
+			<button
+				@click="isOpen = !isOpen"
+				class="px-4 py-2 bg-blue-400 text-white rounded"
+			>
+				Toggle Content
+			</button>
+			<div
+				x-show="isOpen"
+				x-transition:enter="transition-enter"
+				x-transition:enter-start="transition-enter-start"
+				x-transition:enter-end="transition-enter-end"
+				x-transition:leave="transition-leave"
+				x-transition:leave-start="transition-leave-start"
+				x-transition:leave-end="transition-leave-end"
+				class="mt-4 p-4 bg-gray-200 rounded"
+			>
+				<p>Konten ini akan muncul dan menghilang dengan animasi</p>
 			</div>
-			<hr />
-			<template x-if="open">
-				<div>
-					<p>
-						Lorem ipsum dolor sit, amet consectetur adipisicing
-						elit. Odio repudiandae ipsam, est quis cupiditate dicta
-						eum, asperiores temporibus quasi rerum dolore illum
-						tempora quo vitae non molestias animi eligendi iusto.
-					</p>
-				</div>
-			</template>
 		</div>
 	</body>
 </html>

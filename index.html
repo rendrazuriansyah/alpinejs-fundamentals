@@ -13,15 +13,28 @@
 		></script>
 		<style>
 			body {
+				font-family: Arial, sans-serif;
+				transition: background-color 0.3s color 0.3s;
+			}
+			.dark-mode {
+				background-color: #333;
+				color: #fff;
 			}
 		</style>
 	</head>
-	<body>
-		<div
-			x-data="{ message: 'Hello, world!' }"
-			x-init="console.log(message)"
-		>
-			<h1>Welcome</h1>
-		</div>
+	<body
+		x-data
+		x-bind:class="{'dark-mode': $store.darkMode}"
+	>
+		<button @click="$store.darkMode = !$store.darkMode">
+			Toggle Dark Mode
+		</button>
+		<h1>Dark Mode Toggle Example</h1>
+		<p>This is a simple example of a dark mode toggle using Alpine.js</p>
+		<script>
+			document.addEventListener("alpine:init", () => {
+				Alpine.store("darkMode, false");
+			});
+		</script>
 	</body>
 </html>

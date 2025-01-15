@@ -7,26 +7,45 @@
 			content="width=device-width, initial-scale=1.0"
 		/>
 		<title>Alpine.js Fundamentals</title>
+		<!-- Alpine Plugins -->
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"
+		></script>
+
+		<!-- Alpine Core -->
 		<script
 			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
 	</head>
-	<body>
-		<div
-			x-data="{open: false}"
-			x-init="$watch('open', value=>console.log(value))"
-		>
-			<p x-text="open"></p>
-			<button @click="open = !open">Toggle Open</button>
-		</div>
+	<body class="">
+		<section x-data>
+			<!-- x-mask -->
+			<input
+				x-mask="99-99-9999"
+				placeholder="MM-DD-YYYY"
+			/>
 
-		<div
-			x-data="{foo: {bar: 'baz'}}"
-			x-init="$watch('foo.bar', (value, oldValue) => console.log(oldValue))"
-		>
-			<p x-text="foo.bar"></p>
-			<button @click=" foo.bar = 'bob'">Get Old Value</button>
-		</div>
+			<!-- x-mask:dynamic -->
+			<input
+				x-mask:dynamic="
+					$input.startsWith('34') || $input.startsWith('37')
+						? '9999 999999 99999' 
+						: '9999 9999 9999 9999'
+				"
+			/>
+
+			<!-- x-mask:dynamic with function -->
+			<input x-mask:dynamic="creditCardMask" />
+
+			<script>
+				function creditCardMask(input) {
+					return input.startsWith("34") || input.startsWith("37")
+						? "9999 999999 99999"
+						: "9999 9999 9999 9999";
+				}
+			</script>
+		</section>
 	</body>
 </html>

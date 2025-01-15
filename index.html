@@ -13,23 +13,20 @@
 		></script>
 	</head>
 	<body>
-		<div x-data>
-			<span @notify="alert('Hello Bubble')">
-				<button @click="$dispatch('notify')">Notify</button>
-			</span>
+		<div
+			x-data="{open: false}"
+			x-init="$watch('open', value=>console.log(value))"
+		>
+			<p x-text="open"></p>
+			<button @click="open = !open">Toggle Open</button>
 		</div>
 
 		<div
-			x-data="{title: 'Hello Component 1'}"
-			@set-title.window="title = $event.detail"
+			x-data="{foo: {bar: 'baz'}}"
+			x-init="$watch('foo.bar', (value, oldValue) => console.log(oldValue))"
 		>
-			<h1 x-text="title"></h1>
-		</div>
-
-		<div x-data>
-			<button @click="$dispatch('set-title', 'Hello Component 2')">
-				Click Me
-			</button>
+			<p x-text="foo.bar"></p>
+			<button @click=" foo.bar = 'bob'">Get Old Value</button>
 		</div>
 	</body>
 </html>

@@ -7,29 +7,45 @@
 			content="width=device-width, initial-scale=1.0"
 		/>
 		<title>Alpine.js Fundamentals</title>
+		<!-- Alpine Plugins -->
+		<script
+			defer
+			src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"
+		></script>
+
+		<!-- Alpine Core -->
 		<script
 			defer
 			src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 		></script>
 	</head>
-	<body>
-		<div x-data>
-			<span @notify="alert('Hello Bubble')">
-				<button @click="$dispatch('notify')">Notify</button>
-			</span>
-		</div>
+	<body class="">
+		<section x-data>
+			<!-- x-mask -->
+			<input
+				x-mask="99-99-9999"
+				placeholder="MM-DD-YYYY"
+			/>
 
-		<div
-			x-data="{title: 'Hello Component 1'}"
-			@set-title.window="title = $event.detail"
-		>
-			<h1 x-text="title"></h1>
-		</div>
+			<!-- x-mask:dynamic -->
+			<input
+				x-mask:dynamic="
+					$input.startsWith('34') || $input.startsWith('37')
+						? '9999 999999 99999' 
+						: '9999 9999 9999 9999'
+				"
+			/>
 
-		<div x-data>
-			<button @click="$dispatch('set-title', 'Hello Component 2')">
-				Click Me
-			</button>
-		</div>
+			<!-- x-mask:dynamic with function -->
+			<input x-mask:dynamic="creditCardMask" />
+
+			<script>
+				function creditCardMask(input) {
+					return input.startsWith("34") || input.startsWith("37")
+						? "9999 999999 99999"
+						: "9999 9999 9999 9999";
+				}
+			</script>
+		</section>
 	</body>
 </html>
